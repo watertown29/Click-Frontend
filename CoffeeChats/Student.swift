@@ -8,15 +8,47 @@
 
 import Foundation
 
-class Student {
+struct Student:Codable {
     
-    var schoolImageName: String
-    var name: String
-    var year: String
+    let id: Int
+    let name: String
+    let netid: String
+    let year: String
+    let school: String
+    let interests: [Interest]
+    //later functionality
+    //let met_users: [userMet]
+    
+    
 
     init(schoolImageName: String, name: String, year: String) {
-        self.schoolImageName = schoolImageName
+        self.id = 0
         self.name = name
+        self.netid = ""
         self.year = year
+        self.school = schoolImageName
+        self.interests = []
+        //later functionality
+        //self.met_users = []
     }
+    
+}
+
+struct Response: Codable {
+    var success: Bool
+    var data: [Student]
+}
+
+struct Interest: Codable{
+    let id: Int
+    let interest_name: String
+}
+
+struct userMet: Codable{
+    let id: Int
+    let name: String
+    let netid: String
+    let year: String
+    let school: String
+    let interests: [Interest]
 }

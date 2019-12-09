@@ -56,7 +56,8 @@ class StudentCollectionViewCell: UICollectionViewCell {
         }
         
         func configure(for student: Student) {
-            schoolImageView.image = UIImage(named: student.schoolImageName)
+            //once tiles are complete remove hardcode
+            schoolImageView.image = UIImage(named: "cals")
             nameField.text = student.name
             yearField.text = student.year
         }

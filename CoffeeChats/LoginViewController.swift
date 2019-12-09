@@ -12,15 +12,15 @@ import FirebaseAuth
 import FirebaseDatabase
 
 class LoginViewController: UIViewController {
-
-    var logoImageView: UIImageView!
+    
+    var welcomeLabel: UILabel!
+    var instructionsLabel: UILabel!
     var emailTextField: UITextField!
     var passwordTextField: UITextField!
     var confirmTextField: UITextField!
     var loginButton: UIButton!
     var accountButton: UIButton! // switches to login / signup mode
     var loginMode: Bool! // false implies signup mode
-    var ref: DatabaseReference!
 
     var emptyFieldAlert: UIAlertController!
     var incorrectLoginInfoAlert: UIAlertController!
@@ -36,11 +36,22 @@ class LoginViewController: UIViewController {
         view.backgroundColor = .white
 
         loginMode = true
-
-        logoImageView = UIImageView()
-        logoImageView.image = UIImage(named: "filler")
-        logoImageView.contentMode = .scaleAspectFit
-        view.addSubview(logoImageView)
+        
+        welcomeLabel = UILabel()
+        welcomeLabel.text = "Welcome to CoffeeChats"
+        welcomeLabel.textColor = .brown
+        welcomeLabel.textAlignment = .center
+        welcomeLabel.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(welcomeLabel)
+        
+        instructionsLabel = UILabel()
+        instructionsLabel.text = "Sign-in or Sign-up below!"
+        instructionsLabel.textColor = .black
+        instructionsLabel.textAlignment = .center
+        instructionsLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        instructionsLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(instructionsLabel)
 
         emailTextField = UITextField()
         emailTextField.placeholder = " Enter your email"
@@ -63,7 +74,7 @@ class LoginViewController: UIViewController {
 
         loginButton = UIButton()
         loginButton.setTitle("Login", for: .normal)
-        loginButton.backgroundColor = .blue
+        loginButton.backgroundColor = .systemBlue
         loginButton.addTarget(self, action: #selector(loginPress), for: .touchDown)
         view.addSubview(loginButton)
 
@@ -102,14 +113,19 @@ class LoginViewController: UIViewController {
     }
 
     private func setupConstraints(){
-        logoImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(50)
+        
+        welcomeLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(135)
             make.centerX.equalToSuperview()
-            make.width.height.equalTo(100)
+        }
+        
+        instructionsLabel.snp.makeConstraints { make in
+            make.top.equalTo(welcomeLabel).offset(45)
+            make.centerX.equalToSuperview()
         }
 
         emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.bottom).offset(75)
+            make.top.equalTo(instructionsLabel).offset(75)
             make.centerX.equalToSuperview()
             make.height.equalTo(30)
             make.width.equalTo(250)

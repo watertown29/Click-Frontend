@@ -11,17 +11,16 @@ import UIKit
 class ViewController: UIViewController {
     
     var topCollectionView: UICollectionView!
-    var bottomCollectionView: UICollectionView!
-    
+    var refreshButton: UIButton!
+
     var students: [Student] = []
-    var studentGroup: [Student] = []
-    var paula: Student!
-    var steven: Student!
 
     let topStudentCellReuseIdentifier = "studentCellReuseIdentifier"
-    let bottomStudentCellReuseIdentifier = "studentCellReuseIdentifier"
     let padding: CGFloat = 16
     let headerHeight: CGFloat = 30
+    
+    let defaults = UserDefaults.standard
+    var myNetId: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +30,15 @@ class ViewController: UIViewController {
         let editButton   = UIBarButtonItem(title: "Edit You",  style: .plain, target: self, action: #selector(editButtonMethod))
         self.navigationItem.rightBarButtonItem = editButton
         
+        myNetId = ""
+        //find user's netId
+        if let myNetId = defaults.string(forKey: "NetId") {
+            
+            self.myNetId = myNetId
+        }
         
-        // Create Person objects
-        paula = Student(schoolImageName: "cals", name: "Paula", year: "Freshmen")
-        steven = Student(schoolImageName: "ilr", name: "Steven", year: "Junior")
-        students = [paula, steven, paula, steven, paula, paula, paula, steven]
-        studentGroup = [paula, paula, paula, paula, paula, paula, paula, paula]
+        loadStudents()
+
 
         // TODO: Setup topCollectionView
         let layout = UICollectionViewFlowLayout()
@@ -53,22 +55,20 @@ class ViewController: UIViewController {
         
         view.addSubview(topCollectionView)
         
-        // TODO: Setup bottomCollectionView
-        let bLayout = UICollectionViewFlowLayout()
-        bLayout.scrollDirection = .horizontal
-        bLayout.minimumLineSpacing = padding
-        bLayout.minimumInteritemSpacing = padding
-        
-        bottomCollectionView = UICollectionView(frame: .zero, collectionViewLayout: bLayout)
-        bottomCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        bottomCollectionView.backgroundColor = .white
-        bottomCollectionView.register(StudentCollectionViewCell.self, forCellWithReuseIdentifier: bottomStudentCellReuseIdentifier)
-        bottomCollectionView.dataSource = self
-        bottomCollectionView.delegate = self
-        
-        view.addSubview(bottomCollectionView)
+        refreshButton = UIButton()
+        refreshButton.backgroundColor = .white
+        refreshButton.addTarget(self, action: #selector(addItemButtonPressed), for: .touchUpInside)
+        refreshButton.setTitle("Refresh", for: .normal)
+        refreshButton.setTitleColor(.systemBlue, for: .normal)
+        refreshButton.translatesAutoresizingMaskIntoConstraints = false
+        refreshButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+        view.addSubview(refreshButton)
         
         setupConstraints()
+    }
+    
+    @objc func addItemButtonPressed(){
+        self.topCollectionView.reloadData()
     }
     
     @objc func editButtonMethod() -> Void {
@@ -85,14 +85,36 @@ class ViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            bottomCollectionView.topAnchor.constraint(equalTo: topCollectionView.bottomAnchor, constant: padding),
-            bottomCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            bottomCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-            bottomCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+            refreshButton.topAnchor.constraint(equalTo: topCollectionView.bottomAnchor, constant: padding),
+            refreshButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            
         ])
+
     }
 
+    //used to test UI
+    
+//    func loadStudents(){
+//        NetworkManager.getAllUsers() { (students) in
+//        self.students = students
+//
+//            DispatchQueue.main.async {
+//                self.topCollectionView.reloadData()
+//            }
+//        }
+//    }
+    
+    func loadStudents(){
+        if (self.myNetId == "") {return}
+        NetworkManager.getAllMatches(netid: self.myNetId) { (students) in
+        self.students = students
 
+            DispatchQueue.main.async {
+                self.topCollectionView.reloadData()
+            }
+        }
+    }
+    
 }
 
 extension ViewController: UICollectionViewDataSource {
@@ -102,17 +124,10 @@ extension ViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if(collectionView == self.topCollectionView){
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: topStudentCellReuseIdentifier, for: indexPath) as! StudentCollectionViewCell
         cell.configure(for: students[indexPath.row])
         return cell
-        }
-        else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: bottomStudentCellReuseIdentifier, for: indexPath) as! StudentCollectionViewCell
-            cell.configure(for: studentGroup[indexPath.row])
-            return cell
-        }
     }
     
 

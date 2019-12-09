@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		9AD45C0F9160096D956C2B07 /* Pods_CoffeeChats_CoffeeChatsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CED9581E464725CEC8A94AE /* Pods_CoffeeChats_CoffeeChatsUITests.framework */; };
 		B40740BA2392BCDA00A8412E /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40740B92392BCDA00A8412E /* ProfileEditViewController.swift */; };
-		B408CD9223970C710008756F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B408CD9123970C710008756F /* GoogleService-Info.plist */; };
+		B44659D4239D6C2500567660 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B44659D3239D6C2500567660 /* GoogleService-Info.plist */; };
+		B44659D6239D799500567660 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44659D5239D799500567660 /* NetworkManager.swift */; };
 		B47B5CB52391751200E914A1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B5CB42391751200E914A1 /* LoginViewController.swift */; };
 		B4ABDA1B2388C6E100E6B76D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ABDA1A2388C6E100E6B76D /* AppDelegate.swift */; };
 		B4ABDA1F2388C6E100E6B76D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ABDA1E2388C6E100E6B76D /* ViewController.swift */; };
@@ -48,7 +49,8 @@
 		7EBAD1A9F9E351480715B370 /* Pods_CoffeeChats.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoffeeChats.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		830A6872A9D26FB236A085E7 /* Pods-CoffeeChats-CoffeeChatsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeeChats-CoffeeChatsUITests.debug.xcconfig"; path = "Target Support Files/Pods-CoffeeChats-CoffeeChatsUITests/Pods-CoffeeChats-CoffeeChatsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B40740B92392BCDA00A8412E /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
-		B408CD9123970C710008756F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B44659D3239D6C2500567660 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B44659D5239D799500567660 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B47B5CB42391751200E914A1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B4ABDA172388C6E100E6B76D /* CoffeeChats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoffeeChats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4ABDA1A2388C6E100E6B76D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,8 +140,9 @@
 				B40740B92392BCDA00A8412E /* ProfileEditViewController.swift */,
 				B4ABDA502388D59500E6B76D /* StudentCollectionViewCell.swift */,
 				B4ABDA4A2388CCBD00E6B76D /* Student.swift */,
+				B44659D5239D799500567660 /* NetworkManager.swift */,
 				B4ABDA232388C6E300E6B76D /* Assets.xcassets */,
-				B408CD9123970C710008756F /* GoogleService-Info.plist */,
+				B44659D3239D6C2500567660 /* GoogleService-Info.plist */,
 				B4ABDA252388C6E300E6B76D /* LaunchScreen.storyboard */,
 				B4ABDA282388C6E300E6B76D /* Info.plist */,
 			);
@@ -287,8 +290,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4ABDA272388C6E300E6B76D /* LaunchScreen.storyboard in Resources */,
+				B44659D4239D6C2500567660 /* GoogleService-Info.plist in Resources */,
 				B4ABDA242388C6E300E6B76D /* Assets.xcassets in Resources */,
-				B408CD9223970C710008756F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +422,7 @@
 				B4ABDA512388D59500E6B76D /* StudentCollectionViewCell.swift in Sources */,
 				B4ABDA1F2388C6E100E6B76D /* ViewController.swift in Sources */,
 				B4ABDA4B2388CCBD00E6B76D /* Student.swift in Sources */,
+				B44659D6239D799500567660 /* NetworkManager.swift in Sources */,
 				B47B5CB52391751200E914A1 /* LoginViewController.swift in Sources */,
 				B40740BA2392BCDA00A8412E /* ProfileEditViewController.swift in Sources */,
 				B4ABDA1B2388C6E100E6B76D /* AppDelegate.swift in Sources */,

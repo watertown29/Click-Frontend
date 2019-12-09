@@ -9,6 +9,8 @@ target 'CoffeeChats' do
   pod 'SnapKit'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
+  pod 'Alamofire'
+  pod 'SwiftyJSON'
   
 
   target 'CoffeeChatsTests' do
